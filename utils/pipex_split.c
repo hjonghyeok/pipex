@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:12:41 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/05 15:25:56 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/05 15:41:06 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ static char	*pipex_splitdup(char const *s, char c)
 	return (dest);
 }
 
-static void loop(char const *s, int *i)
+static void	loop(char const *s, int *i)
 {
-    if (s[(*i)++] == '\'')
-        while (s[++(*i)] && s[*i - 1] != '\'')
-            ;
-    else
-        while (s[*i - 1] && s[*i - 1] != ' ')
-            (*i)++;
+	if (s[(*i)++] == '\'')
+		while (s[++(*i)] && s[*i - 1] != '\'')
+			;
+	else
+		while (s[*i - 1] && s[*i - 1] != ' ')
+			(*i)++;
 }
 
 static char	**get_split(char const *s, int size)
@@ -90,7 +90,7 @@ static char	**get_split(char const *s, int size)
 			if (!dest[j])
 				return (mem_free(dest, j));
 			j++;
-            loop(s, &i);
+			loop(s, &i);
 		}
 		while (s[i] && s[i] == ' ')
 			i++;

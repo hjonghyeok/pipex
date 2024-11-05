@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:27:26 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/05 15:28:39 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/05 15:42:04 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*add_path(char *s, char **envp);
 void	free_split(char **strs);
 char	**get_path(char **envp);
 char	**pipex_split(char const *s);
-int	    char_in_arr(char *s, char target);
+int		char_in_arr(char *s, char target);
 
 // error
 void	arg_error(void);
