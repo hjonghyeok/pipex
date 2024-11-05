@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 13:38:34 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/04 22:38:51 by jonghan          ###   ########.fr       */
+/*   Created: 2024/11/04 22:15:31 by jonghan           #+#    #+#             */
+/*   Updated: 2024/11/04 23:09:51 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
-int	main(int ac, char **av, char **envp)
+void	arg_error(void)
 {
-	int		fd[2];
-	pid_t	pid;
+	ft_printf("Error: Invalid number of arguments\n");
+	exit(1);
+}
 
-	if (ac == 5)
-	{
-		if (pipe(fd) == -1)
-			other_error();
-		pid = fork();
-		if (pid == -1)
-			other_error();
-		if (pid == 0)
-			child_process(av, envp, fd);
-		waitpid(pid, NULL, 0);
-		parent_process(av, envp, fd);
-	}
-	else
-		arg_error();
-	return (0);
+void	other_error(void)
+{
+	perror("Error: ");
+	exit(1);
+}
+
+void	mem_error(void)
+{
+	ft_printf("Error: Memory allocation failed\n");
+	exit(1);
 }

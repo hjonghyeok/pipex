@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:27:26 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/04 17:03:48 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/04 22:43:51 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,18 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-typedef struct s_pipe
-{
-	char	**cmd1;
-	char	**cmd2;
-	char	*output_file;
-	int		input_file_fd;
-	int		output_file_fd;
-}			t_pipe;
-
 // pipe
-void		get_pipe(t_pipe *pipe, char **av, char **envp);
+void	child_process(char **av, char **envp, int fd[]);
+void	parent_process(char **av, char **envp, int fd[]);
 
 // utils
-char		*add_path(char *s);
-char		**cmd1_join(char **av);
-char		**cmd2_join(char **av);
-void		free_split(char **strs);
+char	*add_path(char *s, char **envp);
+char	**cmd1_join(char **av);
+char	**cmd2_join(char **av);
+void	free_split(char **strs);
+void	arg_error(void);
+void	other_error(void);
+void	mem_error(void);
+char	**get_path(char **envp);
 
 #endif

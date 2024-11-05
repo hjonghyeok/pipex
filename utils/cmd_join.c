@@ -6,19 +6,46 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:42:56 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/04 18:10:40 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/04 22:32:24 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-char	*add_path(char *s)
+char	*add_path(char *s, char **envp)
 {
 	char	*result;
+	char	*tmp;
+	char	**path;
+	int		i;
 
-	result = ft_strjoin("/usr/bin/", s);
-	free(s);
+	path = get_path(envp);
+	i = 0;
+	while (path[i])
+	{
+		tmp = ft_strjoin(path[i], "/");
+		result = ft_strjoin(tmp, s);
+		free(tmp);
+		if (!access(result, F_OK))
+		{
+			free_split(path);
+			return (result);
+		}
+		free(result);
+		i++;
+	}
+	free_split(path);
 	return (result);
+}
+
+char	**get_path(char **envp)
+{
+	char	*path;
+
+	while (ft_strncmp("PATH=", *envp, 5))
+		envp++;
+	path = *envp + 5;
+	return (ft_split(path, ':'));
 }
 
 char	**cmd1_join(char **av)

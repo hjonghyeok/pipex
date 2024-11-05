@@ -9,7 +9,8 @@ RM		= rm -f
 SRCS	= 	main.c						\
 			utils/cmd_join.c			\
 			utils/free_memory.c			\
-			get_pipe/pipe.c
+			utils/print_error.c			\
+			pipe/pipe.c
 
 BSRCS	=
 
