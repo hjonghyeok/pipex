@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:21:28 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/05 01:14:11 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/05 15:29:13 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ void	execve_call(char *av, char **envp)
 	char	**cmd;
 	char	*path;
 
-	cmd = ft_split(av, ' ');
+	if (char_in_arr(av, '\''))
+		cmd = pipex_split(av);
+	else
+		cmd = ft_split(av, ' ');
+	for (int i = 0; cmd[i]; i++)
+		printf("%s\n", cmd[i]);
 	if (!cmd)
 		other_error();
 	path = add_path(cmd[0], envp);
@@ -30,14 +35,17 @@ void	execve_call(char *av, char **envp)
 	{
 		free_split(cmd);
 		free(path);
-		other_error();
+		cmd_error();
 	}
+	free(path);
 }
 
 void	child_process(char **av, char **envp, int fd[])
 {
 	int	input_file_fd;
 
+	if (access(av[1], R_OK) == -1)
+		other_error();
 	input_file_fd = open(av[1], O_RDONLY, 0777);
 	if (input_file_fd == -1)
 		other_error();
@@ -53,7 +61,7 @@ void	parent_process(char **av, char **envp, int fd[])
 {
 	int	output_file_fd;
 
-	output_file_fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	output_file_fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (output_file_fd == -1)
 		other_error();
 	if (dup2(fd[0], STDIN_FILENO) == -1)

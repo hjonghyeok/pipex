@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 08:24:49 by jonghan           #+#    #+#             */
-/*   Updated: 2024/10/27 18:16:23 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/05 14:58:25 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*ft_splitdup(char const *s, char c)
 	return (dest);
 }
 
-static char	**mem_free(char **dest, int j)
+char	**mem_free(char **dest, int j)
 {
 	while (--j >= 0)
 		free(dest[j]);

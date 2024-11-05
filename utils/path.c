@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_join.c                                         :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:42:56 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/04 22:32:24 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/05 15:28:32 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ char	*add_path(char *s, char **envp)
 			free_split(path);
 			return (result);
 		}
-		free(result);
+		if (path[i + 1] != NULL)
+			free(result);
 		i++;
 	}
 	free_split(path);
@@ -48,26 +49,16 @@ char	**get_path(char **envp)
 	return (ft_split(path, ':'));
 }
 
-char	**cmd1_join(char **av)
+int	char_in_arr(char *s, char target)
 {
-	char	**result;
-	char	**split;
-	int		i;
+	int	i;
 
 	i = 0;
-	split = ft_split(av[2], ' ');
-	if (!split)
-		return (NULL);
-	while (split[i])
+	while (s[i])
+	{
+		if (s[i] == target)
+			return (1);
 		i++;
-	result = (char **)ft_calloc(sizeof(char *), (i + 2));
-	if (!result)
-		return (NULL);
-	result[i] = NULL;
-	i = 0;
-	while (split[i])
-		result[i++] = ft_strdup(split[i]);
-	result[i] = ft_strdup(av[1]);
-	free_split(split);
-	return (result);
+	}
+	return (0);
 }

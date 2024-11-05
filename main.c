@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:38:34 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/04 22:38:51 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/05 13:33:55 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ int	main(int ac, char **av, char **envp)
 			other_error();
 		if (pid == 0)
 			child_process(av, envp, fd);
+		else
+			parent_process(av, envp, fd);
 		waitpid(pid, NULL, 0);
-		parent_process(av, envp, fd);
 	}
 	else
 		arg_error();

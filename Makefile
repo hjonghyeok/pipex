@@ -7,9 +7,10 @@ CFLAGS	= # -Wall -Wextra -Werror
 RM		= rm -f
 
 SRCS	= 	main.c						\
-			utils/cmd_join.c			\
+			utils/path.c				\
 			utils/free_memory.c			\
 			utils/print_error.c			\
+			utils/pipex_split.c			\
 			pipe/pipe.c
 
 BSRCS	=
