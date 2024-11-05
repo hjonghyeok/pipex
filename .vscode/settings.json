@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "pipex.h": "c",
-        "fcntl.h": "c",
-        "unistd.h": "c",
-        "stdio.h": "c",
-        "ft_printf.h": "c"
-    }
-}
