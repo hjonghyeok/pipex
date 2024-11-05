@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:12:41 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/05 22:52:05 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/05 23:02:25 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ static char	**get_split(char const *s, int size, char c)
 char	**pipex_split(char const *s, char c)
 {
 	int		size;
-	char	**dest;
 
 	size = 0;
 	getsize(s, &size, c);

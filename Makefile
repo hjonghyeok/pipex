@@ -3,7 +3,7 @@ PRINTFDIR	= ./ft_printf
 PRINTFFILE	= libftprintf.a
 
 CC		= cc
-CFLAGS	= # -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror
 RM		= rm -f
 
 SRCS	= 	main.c						\
@@ -19,14 +19,11 @@ OBJS	= $(SRCS:.c=.o)
 BOBJS	= $(BSRCS:.c=.o)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I./gnl
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJS)
 	make -C $(PRINTFDIR)
 	$(CC) $(CFLAGS) $(OBJS) -L./ft_printf -lftprintf -o $(NAME)
-
-test  :
-	valgrind ./pipex ft_printf "ls -al"
 
 bonus :
 
