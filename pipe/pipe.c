@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:21:28 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/05 15:29:13 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/05 15:34:16 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	execve_call(char *av, char **envp)
 		cmd = pipex_split(av);
 	else
 		cmd = ft_split(av, ' ');
-	for (int i = 0; cmd[i]; i++)
-		printf("%s\n", cmd[i]);
 	if (!cmd)
 		other_error();
 	path = add_path(cmd[0], envp);
