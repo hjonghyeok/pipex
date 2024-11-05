@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:42:56 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/05 15:40:44 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/05 22:54:31 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ char	**get_path(char **envp)
 	return (ft_split(path, ':'));
 }
 
-int	char_in_arr(char *s, char target)
+char	char_in_arr(char *s)
 {
 	int	i;
 
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == target)
-			return (1);
+		if (s[i] == '\'' || s[i] == 34)
+			return (s[i]);
 		i++;
 	}
 	return (0);

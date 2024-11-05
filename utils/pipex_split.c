@@ -6,13 +6,13 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 15:12:41 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/05 15:41:06 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/05 22:52:05 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-static void	getsize(char const *s, int *size)
+static void	getsize(char const *s, int *size, char c)
 {
 	int	i;
 
@@ -27,10 +27,10 @@ static void	getsize(char const *s, int *size)
 			while (s[i] && s[i] == ' ')
 				i++;
 		}
-		else if (s[i++] == '\'')
+		else if (s[i++] == c)
 		{
 			*size += 1;
-			while (s[++i] && s[i - 1] != '\'')
+			while (s[++i] && s[i - 1] != c)
 				;
 		}
 	}
@@ -42,14 +42,14 @@ static char	*pipex_splitdup(char const *s, char c)
 	int		len;
 
 	len = 0;
-	if (s[len++] == '\'')
+	if (s[len++] == c)
 	{
 		s++;
-		while (s[++len] && s[len] != '\'')
+		while (s[++len] && s[len] != c)
 			;
 	}
 	else
-		while (s[len] && s[len] != c)
+		while (s[len] && s[len] != ' ')
 			len++;
 	dest = (char *)ft_calloc(sizeof(char), (len + 1));
 	if (!dest)
@@ -61,17 +61,17 @@ static char	*pipex_splitdup(char const *s, char c)
 	return (dest);
 }
 
-static void	loop(char const *s, int *i)
+static void	loop(char const *s, int *i, char c)
 {
-	if (s[(*i)++] == '\'')
-		while (s[++(*i)] && s[*i - 1] != '\'')
+	if (s[(*i)++] == c)
+		while (s[++(*i)] && s[*i - 1] != c)
 			;
 	else
 		while (s[*i - 1] && s[*i - 1] != ' ')
 			(*i)++;
 }
 
-static char	**get_split(char const *s, int size)
+static char	**get_split(char const *s, int size, char c)
 {
 	int		i;
 	int		j;
@@ -84,13 +84,13 @@ static char	**get_split(char const *s, int size)
 	j = 0;
 	while (s[i] && j < size)
 	{
-		if (s[i] != ' ' || s[i] == '\'')
+		if (s[i] != ' ' || s[i] == c)
 		{
-			dest[j] = pipex_splitdup(&s[i], ' ');
+			dest[j] = pipex_splitdup(&s[i], c);
 			if (!dest[j])
 				return (mem_free(dest, j));
 			j++;
-			loop(s, &i);
+			loop(s, &i, c);
 		}
 		while (s[i] && s[i] == ' ')
 			i++;
@@ -99,14 +99,14 @@ static char	**get_split(char const *s, int size)
 	return (dest);
 }
 
-char	**pipex_split(char const *s)
+char	**pipex_split(char const *s, char c)
 {
 	int		size;
 	char	**dest;
 
 	size = 0;
-	getsize(s, &size);
+	getsize(s, &size, c);
 	if (!size)
 		return (NULL);
-	return (get_split(s, size));
+	return (get_split(s, size, c));
 }
