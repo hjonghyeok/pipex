@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:27:26 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/05 22:54:36 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/06 12:24:32 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	char_in_arr(char *s);
 void	arg_error(void);
 void	other_error(void);
 void	mem_error(void);
-void	cmd_error(void);
+void	cmd_error(char **strs);
+void	fd_error(char *s);
 
 #endif
