@@ -6,13 +6,13 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 21:40:38 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/06 22:15:33 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/06 23:54:42 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int read_std(char *buf)
+int	read_std(char *buf)
 {
 	int	ret;
 

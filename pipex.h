@@ -28,7 +28,7 @@
 # define BUF_SIZE 10000
 
 // basic
-void    basic_pipe(char **av, char **envp);
+void	basic_pipe(char **av, char **envp);
 
 // process
 void	child_process(char **av, char **envp, int fd[]);
@@ -51,8 +51,8 @@ void	cmd_error(char **strs);
 void	fd_error(char *s);
 
 // bonus
-void    bonus_pipe(int ac, char **av, char **envp);
-int read_std(char *buf);
-void    here_doc_pipe(char **av);
+void	bonus_pipe(int ac, char **av, char **envp);
+int		read_std(char *buf);
+void	here_doc_pipe(char **av);
 
 #endif
