@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   basic_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 13:38:34 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/06 21:26:25 by jonghan          ###   ########.fr       */
+/*   Created: 2024/11/06 21:06:30 by jonghan           #+#    #+#             */
+/*   Updated: 2024/11/06 21:08:33 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
-int	main(int ac, char **av, char **envp)
+void    basic_pipe(char **av, char **envp)
 {
-	if (ac == 5)
-		basic_pipe(av, envp);
-	else if (ac > 5)
-		bonus_pipe(ac, av, envp);
-	else
-		arg_error();
-	exit(0);
+    int		fd[2];
+	pid_t	pid;
+    
+    if (pipe(fd) == -1)
+        other_error();
+    pid = fork();
+    if (pid == -1)
+        other_error();
+    if (pid == 0)
+        child_process(av, envp, fd);
+    else
+        parent_process(av, envp, fd);
+    waitpid(pid, NULL, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:21:28 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/06 12:24:45 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/06 21:23:08 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	child_process(char **av, char **envp, int fd[])
 {
 	int	input_file_fd;
 
+	close(fd[0]);
 	if (access(av[1], R_OK) == -1)
 		fd_error(av[1]);
 	input_file_fd = open(av[1], O_RDONLY, 0777);
@@ -53,14 +54,15 @@ void	child_process(char **av, char **envp, int fd[])
 		fd_error(av[1]);
 	if (dup2(input_file_fd, STDIN_FILENO) == -1)
 		fd_error(av[1]);
-	close(fd[0]);
 	execve_call(av[2], envp);
+	exit(0);
 }
 
 void	parent_process(char **av, char **envp, int fd[])
 {
 	int	output_file_fd;
 
+	close(fd[1]);
 	output_file_fd = open(av[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (output_file_fd == -1)
 		fd_error(av[4]);
@@ -68,6 +70,6 @@ void	parent_process(char **av, char **envp, int fd[])
 		fd_error(av[4]);
 	if (dup2(output_file_fd, STDOUT_FILENO) == -1)
 		fd_error(av[4]);
-	close(fd[1]);
 	execve_call(av[3], envp);
+	exit(0);
 }

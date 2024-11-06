@@ -11,12 +11,13 @@ SRCS	= 	main.c						\
 			utils/free_memory.c			\
 			utils/print_error.c			\
 			utils/pipex_split.c			\
-			pipe/pipe.c
-
-BSRCS	=
+			pipe/pipe.c					\
+			pipe/basic_pipe.c			\
+			bonus/bonus_pipe.c			\
+			bonus/here_doc.c			\
+			bonus_utils/read_std.c		\
 
 OBJS	= $(SRCS:.c=.o)
-BOBJS	= $(BSRCS:.c=.o)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -25,7 +26,7 @@ $(NAME) : $(OBJS)
 	make -C $(PRINTFDIR)
 	$(CC) $(CFLAGS) $(OBJS) -L./ft_printf -lftprintf -o $(NAME)
 
-bonus :
+bonus :	all
 
 all : $(NAME)
 
