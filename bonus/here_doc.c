@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 21:45:26 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/06 22:23:43 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/07 02:23:41 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ void	here_doc_child(char **av, int fd[])
 		if (ret < 0 || ft_strncmp(buf, limiter, ft_strlen(limiter)) == 0)
 		{
 			free(buf);
+			free(limiter);
 			exit(0);
 		}
 		write(fd[1], buf, ft_strlen(buf));
 	}
+	free(limiter);
 	free(buf);
 }
 
@@ -55,6 +57,6 @@ void	here_doc_pipe(char **av)
 		close(fd[1]);
 		if (dup2(fd[0], STDIN_FILENO) == -1)
 			fd_error(av[5]);
-		wait(NULL);
+	waitpid(pid, NULL, 0);
 	}
 }

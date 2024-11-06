@@ -13,9 +13,6 @@ SRCS	= 	main.c						\
 			utils/pipex_split.c			\
 			pipe/pipe.c					\
 			pipe/basic_pipe.c			\
-			bonus/bonus_pipe.c			\
-			bonus/here_doc.c			\
-			bonus_utils/read_std.c		\
 
 BSRCS 	= 	main_bonus.c				\
 			utils/path.c				\

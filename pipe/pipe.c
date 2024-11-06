@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:21:28 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/07 02:08:39 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/07 02:21:07 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	execve_call(char *av, char **envp)
 		free_split(cmd);
 		mem_error();
 	}
-	if (execve(cmd[0], cmd, envp) == -1)
+	if (execve(path, cmd, envp) == -1)
 	{
 		free(path);
 		cmd_error(cmd);
