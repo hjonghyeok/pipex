@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 15:42:56 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/05 22:54:31 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/08 17:46:27 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,14 @@ char	char_in_arr(char *s)
 		i++;
 	}
 	return (0);
+}
+
+char	**get_cmd(char *av)
+{
+	char	c;
+
+	c = char_in_arr(av);
+	if (c)
+		return (pipex_split(av, c));
+	return (ft_split(av, ' '));
 }

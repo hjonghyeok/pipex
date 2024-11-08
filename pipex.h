@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:27:26 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/06 22:04:25 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/08 17:46:23 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	**get_path(char **envp);
 char	**pipex_split(char const *s, char c);
 char	char_in_arr(char *s);
 char	*get_next_line(int fd);
+char	**get_cmd(char *av);
 
 // error
 void	arg_error(void);

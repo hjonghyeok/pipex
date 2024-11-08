@@ -6,7 +6,7 @@
 /*   By: jonghan <jonghan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 22:21:28 by jonghan           #+#    #+#             */
-/*   Updated: 2024/11/07 02:21:07 by jonghan          ###   ########.fr       */
+/*   Updated: 2024/11/08 18:10:05 by jonghan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,8 @@ void	execve_call(char *av, char **envp)
 {
 	char	**cmd;
 	char	*path;
-	char	c;
 
-	c = char_in_arr(av);
-	if (c)
-		cmd = pipex_split(av, c);
-	else
-		cmd = ft_split(av, ' ');
+	cmd = get_cmd(av);
 	if (!cmd)
 		mem_error();
 	path = add_path(cmd[0], envp);
@@ -33,8 +28,11 @@ void	execve_call(char *av, char **envp)
 	}
 	if (execve(path, cmd, envp) == -1)
 	{
-		free(path);
-		cmd_error(cmd);
+		if (execve(cmd[0], cmd, envp) == -1)
+		{
+			free(path);			
+			cmd_error(cmd);
+		}
 	}
 	free_split(cmd);
 	free(path);
