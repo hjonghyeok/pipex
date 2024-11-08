@@ -30,7 +30,7 @@ void	execve_call(char *av, char **envp)
 	{
 		if (execve(cmd[0], cmd, envp) == -1)
 		{
-			free(path);			
+			free(path);
 			cmd_error(cmd);
 		}
 	}

@@ -57,6 +57,6 @@ void	here_doc_pipe(char **av)
 		close(fd[1]);
 		if (dup2(fd[0], STDIN_FILENO) == -1)
 			fd_error(av[5]);
-	waitpid(pid, NULL, 0);
+		waitpid(pid, NULL, 0);
 	}
 }
